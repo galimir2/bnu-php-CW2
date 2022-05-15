@@ -13,14 +13,13 @@
 
       $sql = "SELECT * FROM student";
 
-      // Build SQL statment that selects a student's modules
-      // $sql = "select * from studentmodules sm, module m where m.modulecode = sm.modulecode and sm.studentid = '" . $_SESSION['id'] ."';";
-
       $result = mysqli_query($conn,$sql);
 
+      // Wrap table in a form
+      $data['content'] .= "<form action='deletestudents.php' method='POST'>";
       // prepare page content
       $data['content'] .= "<table border='1'>";
-      // $data['content'] .= "<tr><th colspan='5' align='center'>Modules</th></tr>";
+      
       $data['content'] .= "<tr><th>StudentID</th><th>Password</th><th>DOB</th><th>FirstName</th>
       <th>LastName</th><th>House</th><th>Town</th><th>County</th><th>Country</th><th>Postcode</th></tr>";
       // Display the modules within the html table
@@ -36,9 +35,15 @@
         $data['content'] .= "<td> {$row["county"]} </td>";
         $data['content'] .= "<td> {$row["country"]} </td>";
         $data['content'] .= "<td> {$row["postcode"]} </td>";
+        $data['content'] .= "<td> <input type= 'checkbox' name='students[]' value='$row[studentid]' /></td>";
         $data['content'] .= "</tr>";
       }
       $data['content'] .= "</table>";
+      //Delete Button
+      $data['content'] .= "<input type='submit' name='deletebtn' value='Delete'/>";
+
+      $data['content'] .= "</form>";
+      
 
       // render the template
       echo template("templates/default.php", $data);
