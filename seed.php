@@ -21,7 +21,7 @@
         $lastname = $faker->lastName();
         $streetAddress = $faker->streetAddress();
         $town = "Reading";
-        $county = "Birkshire";
+        $county = "Berkshire";
         $country = "United Kingdom";
         $postcode =  "RG1" . $faker->numberBetween(0, 1) . " " . 
         $faker->randomNumber(2, false) . 
