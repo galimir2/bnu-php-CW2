@@ -30,26 +30,13 @@ if (isset($_POST['submit']) && count($_FILES) > 0)
 
         $sql = "INSERT INTO student (studentid, password, dob, firstname, lastname, house, town, county, country, postcode, studentphoto)
         VALUES ('$studentID', '$hashPassword', '$DOB','$firstname', '$lastname', '$house','$town', '$county', '$country','$postcode', '{$imgData}')";
-        
-        $duplication_sql_id = "SELECT studentid FROM student WHERE studentid = $studentID";
 
         $result = mysqli_query($conn, $sql);
-        $resultTwo = mysqli_query($conn, $duplication_sql_id);
 
         if ($result) 
         {
         echo "<h2>You have added a new record!</h2>";
         }
-        elseif($resultTwo)
-        {
-            echo "The ID you are trying to create already exists!";
-        }
-        else 
-        {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        mysqli_close($conn);
-        }
-    
     }
 }
 ?>
